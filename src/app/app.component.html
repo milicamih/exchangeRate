@@ -1,7 +1,24 @@
 
-  <h1>
+  <h3 class="headline">
     Welcome to {{ title }}!
-  </h1>
+  </h3>
+  <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <!-- Brand/logo -->
+    <a class="navbar-brand" href="#">
+      <img src="assets/img/logo.png" alt="logo" style="width:60px;">
+    </a>
+    
+    <!-- Links -->
+    <ul class="navbar-nav">
+      <li class="nav-item">
+       <b><a class="routerlink nav-link" routerLink="/exchangeRateWiew" 
+        routerLinkActive="active-link">EXCHANGE RATES</a></b>
+      </li>
+      <li class="nav-item">
+        <b><a class="routerlink nav-link" routerLink="/currencyConverter"
+        [routerLinkActive]="['active-link']">CURRENCY CONVERTER</a></b>
+      </li>
+    </ul>
+  </nav>
 
-
-<router-outlet></router-outlet>
+  <router-outlet></router-outlet>

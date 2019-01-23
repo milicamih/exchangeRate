@@ -1,0 +1,11 @@
+.headline{
+   color:#bfbaba;
+   text-align: center;
+}
+.routerlink{
+  font-size: 14px;
+ }
+.active-link{
+     color:#24b2ac !important;
+ }
+ 
