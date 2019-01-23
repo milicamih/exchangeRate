@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ExchangerateService } from '../shared/service/exchangeRate.service';
+import { ExchangeRateService } from '../shared/service/exchangeRate.service';
 import { HttpClient } from '@angular/common/http';
 import { CurrencyRates } from '../shared/models/currencyRates';
 
@@ -12,7 +12,7 @@ export class CurrencyConverterComponent implements OnInit {
 
   currencyRates: CurrencyRates[] = [];
 
-  constructor(private http: HttpClient, private exchangerateService : ExchangerateService) { }
+  constructor(private http: HttpClient, private exchangerateService : ExchangeRateService) { }
 
   ngOnInit() {
   }

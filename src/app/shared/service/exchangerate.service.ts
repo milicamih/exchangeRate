@@ -7,7 +7,7 @@ import { CurrencyRates } from '../models/currencyRates';
   providedIn: 'root'
 })
 
-export class ExchangerateService {
+export class ExchangeRateService {
 
   private serverAddress = 'http://data.fixer.io/api/';
   private accessKey = '86b418f0e129899d8fadd57480356e95';
@@ -18,6 +18,5 @@ export class ExchangerateService {
      return this.http.get<CurrencyRates>(`${this.serverAddress}latest?access_key=${this.accessKey}`);
   }
 
-   
 }
 

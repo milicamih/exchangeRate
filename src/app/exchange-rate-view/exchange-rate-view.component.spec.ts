@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ExchangeRateWiewComponent } from './exchange-rate-wiew.component';
+import { ExchangeRateViewComponent } from './exchange-rate-view.component';
 
-describe('ExchangeRateWiewComponent', () => {
-  let component: ExchangeRateWiewComponent;
-  let fixture: ComponentFixture<ExchangeRateWiewComponent>;
+describe('ExchangeRateViewComponent', () => {
+  let component: ExchangeRateViewComponent;
+  let fixture: ComponentFixture<ExchangeRateViewComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ExchangeRateWiewComponent ]
+      declarations: [ ExchangeRateViewComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ExchangeRateWiewComponent);
+    fixture = TestBed.createComponent(ExchangeRateViewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

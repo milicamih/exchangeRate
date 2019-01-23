@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ExchangerateService } from './exchangerate.service';
+import { ExchangeRateService } from './exchangeRate.service';
 
-describe('ExchangerateService', () => {
+describe('ExchangeRateService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: ExchangerateService = TestBed.get(ExchangerateService);
+    const service: ExchangeRateService = TestBed.get(ExchangeRateService);
     expect(service).toBeTruthy();
   });
 });
