@@ -1,6 +1,18 @@
 
-<ul>
-  <li *ngFor="let currency of random10Currencies">
-    Key: <b>{{currency.name}}</b> and Value: <b>{{currency.value}}</b>
-  </li>
-</ul>
+
+<table class="table table-bordered table-dark">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">CURRENCY</th>
+      <th scope="col">VALUE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let currency of random10Currencies let i = index">
+      <td><b>{{i+1}}</b></td>
+      <td><b>{{currency.name}}</b></td> 
+      <td><b>{{currency.value}}</b></td>
+    </tr> 
+  </tbody>
+</table>

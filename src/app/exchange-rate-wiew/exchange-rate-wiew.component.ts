@@ -35,13 +35,13 @@ export class ExchangeRateWiewComponent implements OnInit {
     return Object.keys(data.rates).map(key => {
       return <Currency>{
         name: key,
-        value: data[key]
+        value: data.rates[key]
       }
     })
   }
 
   getRandom10Currencies(allCurrencies: Currency[]): Currency[] {
-    for (let i = 0; this.random10Currencies.length <= 10; i++) {
+    for (let i = 0; this.random10Currencies.length <10; i++) {
       var randomCurency = allCurrencies[Math.floor(Math.random() * allCurrencies.length)];
       if (this.random10Currencies[i] !== randomCurency) {
         this.random10Currencies.push(randomCurency);
