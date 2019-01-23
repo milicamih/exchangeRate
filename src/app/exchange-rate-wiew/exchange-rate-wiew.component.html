@@ -1,18 +1,28 @@
+<div class="container exchange-rate-wraper">
+    <div class="row">
+      <div class="col-md-6 col-sm-12">
+        <p class="tablecaption">Some random curency rates<br/> 
+          <small>* refresh page for more</small></p>
+          <table class="table table-bordered table-dark">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">CURRENCY</th>
+                  <th scope="col">VALUE</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let currency of random10Currencies let i = index">
+                  <td><b>{{i+1}}</b></td>
+                  <td><b>{{currency.name}}</b></td> 
+                  <td><b>{{currency.value}}</b></td>
+                </tr> 
+              </tbody>
+            </table>
+      </div>
+      <div class="col-md-6 col-sm12">
+          One of three columns
+      </div>
+    </div>
+</div>      
 
-
-<table class="table table-bordered table-dark">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">CURRENCY</th>
-      <th scope="col">VALUE</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let currency of random10Currencies let i = index">
-      <td><b>{{i+1}}</b></td>
-      <td><b>{{currency.name}}</b></td> 
-      <td><b>{{currency.value}}</b></td>
-    </tr> 
-  </tbody>
-</table>
