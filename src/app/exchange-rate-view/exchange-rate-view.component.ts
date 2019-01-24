@@ -10,7 +10,6 @@ import { Currency } from '../shared/models/currency';
   selector: 'app-exchange-rate-view',
   templateUrl: './exchange-rate-view.component.html',
   styleUrls: ['./exchange-rate-view.component.css'],
-
 })
 export class ExchangeRateViewComponent implements OnInit {
 
@@ -18,21 +17,15 @@ export class ExchangeRateViewComponent implements OnInit {
   allCurrencies: Currency[] = [];
   random10Currencies: Currency[] = [];
 
-
+  bsInlineValue = new Date();
+  selectedCurrency = null;
 
   constructor(private http: HttpClient, private exchangeRateService: ExchangeRateService) {
-  
-
-   
-   }
-
+  }
 
   ngOnInit() {
     this.loadData();
   }
-
- 
-
 
   loadData() {
     this.exchangeRateService.getLatestCurrencyRates().subscribe(data => {
@@ -65,6 +58,9 @@ export class ExchangeRateViewComponent implements OnInit {
     return randomCurrencies;
   }
 
-  
+  selectCurency(event) {
+    debugger;
+    this.selectedCurrency = event.target.value;
+  }
 
 }

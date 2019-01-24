@@ -7,8 +7,8 @@ import { PageNotFoundComponent } from './not-found.component';
 
 
 const routes: Routes = [
-  { path: '', redirectTo: '/exchangeRateWiew', pathMatch: 'full' },
-  { path: 'exchangeRateview', component: ExchangeRateViewComponent },
+  { path: '', redirectTo: '/exchangeRateView', pathMatch: 'full' },
+  { path: 'exchangeRateView', component: ExchangeRateViewComponent },
   { path: 'currencyConverter', component: CurrencyConverterComponent },
   { path: '**', component: PageNotFoundComponent }
 ];

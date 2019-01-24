@@ -1,31 +1,38 @@
 <div class="container exchange-rate-wraper">
-    <div class="row">
-      <div class="col-md-6 col-sm-12">
-        <p class="tablecaption">Random curency rates<br/> 
-          <small>* refresh page for new random currencies</small></p>
-          <table class="table table-bordered table-dark">
-              <thead>
-                <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">CURRENCY</th>
-                  <th scope="col">VALUE</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let currency of random10Currencies let i = index">
-                  <td><b>{{i+1}}</b></td>
-                  <td><b>{{currency.name}}</b></td> 
-                  <td><b>{{currency.value}}</b></td>
-                </tr> 
-              </tbody>
-            </table>
+  <div class="row">
+    <div class="col-md-6 col-sm-12">
+      <p class="tablecaption">Random curency rates<br />
+        <small>* refresh page for new random currencies</small></p>
+      <table class="table table-bordered table-dark">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">CURRENCY</th>
+            <th scope="col">VALUE</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let currency of random10Currencies let i = index">
+            <td><b>{{i+1}}</b></td>
+            <td><b>{{currency.name}}</b></td>
+            <td><b>{{currency.value}}</b></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-6 col-sm-12">
+      <p class="text">Select the currency and time to see the value of the currency in the selected time</p>
+      <div class="form-group">
+        <input type="text" placeholder="Datepicker" class="form-control" bsDatepicker [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD'}"
+          [maxDate]="bsInlineValue" [bsValue]="bsInlineValue">
       </div>
-      <div class="col-md-6 col-sm12">
-          <p>Simple datepicker</p>
-          <p>This datepicker uses customized default values.</p>
 
-
-
-</div>    <!--zatvaranje colone-->
-</div>  
-
+      <select class="btn btn-dark" (change)="selectCurency($event)">
+        <option value="{{item.key}}" *ngFor="let item of currencyRates?.rates | keyvalue">
+          {{item.key}}
+        </option>
+      </select>
+    </div>
+  </div>
+  <!--closing row-->
+</div>

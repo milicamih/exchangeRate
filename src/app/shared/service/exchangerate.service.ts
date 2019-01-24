@@ -18,5 +18,7 @@ export class ExchangeRateService {
      return this.http.get<CurrencyRates>(`${this.serverAddress}latest?access_key=${this.accessKey}`);
   }
 
+
+
 }
 
