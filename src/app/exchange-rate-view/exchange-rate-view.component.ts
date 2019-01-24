@@ -19,6 +19,8 @@ export class ExchangeRateViewComponent implements OnInit {
 
   bsInlineValue = new Date();
   selectedCurrency = null;
+  date: string;
+  lastHistoricalRate: number;
 
   constructor(private http: HttpClient, private exchangeRateService: ExchangeRateService) {
   }
@@ -32,6 +34,8 @@ export class ExchangeRateViewComponent implements OnInit {
       this.currencyRates = data;
       this.allCurrencies = this.getCurrencies(data);
       this.random10Currencies = this.getRandom10Currencies(this.allCurrencies);
+    }, error => {
+      console.log('Error while get latest currency rates data !');
     });
   }
 
@@ -59,8 +63,20 @@ export class ExchangeRateViewComponent implements OnInit {
   }
 
   selectCurency(event) {
-    debugger;
     this.selectedCurrency = event.target.value;
+  }
+
+  onClickPickDate(event) {
+    this.date = event.toISOString().slice(0, 10);
+  }
+
+
+  onClickGetHistoricalRate() {
+    this.exchangeRateService.getHistoricalCurrencyRates(this.date, this.selectedCurrency).subscribe(data => {
+      this.lastHistoricalRate = data.rates[this.selectedCurrency];
+    }, error => {
+      console.log('Error while get historical data !');
+    })
   }
 
 }

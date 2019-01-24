@@ -18,7 +18,10 @@ export class ExchangeRateService {
      return this.http.get<CurrencyRates>(`${this.serverAddress}latest?access_key=${this.accessKey}`);
   }
 
-
+  getHistoricalCurrencyRates(date: string, currencyName: string): Observable<CurrencyRates> {
+    return this.http.get<CurrencyRates>(`${this.serverAddress}${date}?access_key=${this.accessKey}&symbols=${currencyName}`);
+ }
+  
 
 }
 

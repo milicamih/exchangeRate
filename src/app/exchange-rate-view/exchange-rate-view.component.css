@@ -1,5 +1,6 @@
 .exchange-rate-wraper{
-   margin-top: 30px;
+   margin: 30px 5px;;
+
 }
 .tablecaption{
     color:white;
@@ -7,4 +8,14 @@
 }
 .text{
     color:white;
+}
+.shoow-curency-value-btn{
+    display: block;
+    margin:15px auto;
+}
+.show-curency-rate-on-date{
+    width: 99%;
+    height: 36px;
+    background-color: white;
+    border-radius: 5px;
 }

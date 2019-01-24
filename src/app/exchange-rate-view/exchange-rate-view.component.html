@@ -23,16 +23,22 @@
     <div class="col-md-6 col-sm-12">
       <p class="text">Select the currency and time to see the value of the currency in the selected time</p>
       <div class="form-group">
-        <input type="text" placeholder="Datepicker" class="form-control" bsDatepicker [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD'}"
-          [maxDate]="bsInlineValue" [bsValue]="bsInlineValue">
+        <input type="text" placeholder="Datepicker" 
+        class="form-control" bsDatepicker 
+        [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD'}"
+        [maxDate]="bsInlineValue" [bsValue]="bsInlineValue"
+        (bsValueChange)="onClickPickDate($event)"
+        >
       </div>
 
-      <select class="btn btn-dark" (change)="selectCurency($event)">
+      <select class="btn-block btn btn-dark" (change)="selectCurency($event)">
+        <option disabled selected value style="display:none"> select an currency </option>
         <option value="{{item.key}}" *ngFor="let item of currencyRates?.rates | keyvalue">
           {{item.key}}
         </option>
       </select>
+      <button (click)="onClickGetHistoricalRate()" class="shoow-curency-value-btn btn btn-outline-success">shoow curency value</button>
+      <div class="show-curency-rate-on-date">{{lastHistoricalRate}}</div>
     </div>
-  </div>
-  <!--closing row-->
+  </div><!--closing row-->
 </div>
