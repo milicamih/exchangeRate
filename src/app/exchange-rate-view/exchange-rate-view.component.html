@@ -1,44 +1,49 @@
 <div class="container exchange-rate-wraper">
   <div class="row">
-    <div class="col-md-6 col-sm-12">
-      <p class="tablecaption">Random curency rates<br />
-        <small>* refresh page for new random currencies</small></p>
-      <table class="table table-bordered table-dark">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">CURRENCY</th>
-            <th scope="col">VALUE</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let currency of random10Currencies let i = index">
-            <td><b>{{i+1}}</b></td>
-            <td><b>{{currency.name}}</b></td>
-            <td><b>{{currency.value}}</b></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="col-md-6 col-sm-12">
-      <p class="text">Select the currency and time to see the value of the currency in the selected time</p>
-      <div class="form-group">
-        <input type="text" placeholder="Datepicker" 
-        class="form-control" bsDatepicker 
-        [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD'}"
-        [maxDate]="bsInlineValue" [bsValue]="bsInlineValue"
-        (bsValueChange)="onClickPickDate($event)"
-        >
+    <div class="bootstrap-colon col-md-6 col-sm-12">
+      <div class="colon-wraper">
+        <p class="tablecaption">Random curency rates in relation to the EUR</p>
+        <table class="table table-bordered table-dark">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">CURRENCY</th>
+              <th scope="col">VALUE</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let currency of random10Currencies let i = index">
+              <td><b>{{i+1}}</b></td>
+              <td><b>{{currency.name}}</b></td>
+              <td><b>{{currency.value}}</b></td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="text"><small>* refresh page for new random currencies</small></p>
       </div>
-
-      <select class="btn-block btn btn-dark" (change)="selectCurency($event)">
-        <option disabled selected value style="display:none"> select an currency </option>
-        <option value="{{item.key}}" *ngFor="let item of currencyRates?.rates | keyvalue">
-          {{item.key}}
-        </option>
-      </select>
-      <button (click)="onClickGetHistoricalRate()" class="shoow-curency-value-btn btn btn-outline-success">shoow curency value</button>
-      <div class="show-curency-rate-on-date">{{lastHistoricalRate}}</div>
     </div>
-  </div><!--closing row-->
+    <div class="bootstrap-colon col-md-6 col-sm-12">
+      <div class="colon-wraper">
+        <p class="text">Select the currency and time to see the value of the currency in the selected time</p>
+        <div class="form-group">
+          <input class="datepicker-value-show form-control" type="text" 
+          placeholder="Datepicker" bsDatepicker [maxDate]="bsInlineValue"
+            [minDate]="minDate" [bsValue]="bsInlineValue"
+             [isOpen]="isOpen" (bsValueChange)="onClickPickDate($event)">
+        </div>
+
+        <select class="select-curency btn-block btn btn-outline-success" (change)="selectCurency($event)">
+          <option disabled selected value style="display:none">select one currency</option>
+          <option value="{{item.key}}" *ngFor="let item of currencyRates?.rates | keyvalue">
+            <b>{{item.key}}</b>
+          </option>
+        </select>
+
+        <button (click)="onClickGetHistoricalRate()" class="shoow-curency-value-btn btn btn-success">shoow curency
+          value</button>
+        <div class="show-curency-rate-on-date">{{lastHistoricalRate}}</div>
+      </div>
+    </div>
+  </div>
+  <!--closing row-->
 </div>

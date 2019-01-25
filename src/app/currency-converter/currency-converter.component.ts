@@ -10,11 +10,39 @@ import { CurrencyRates } from '../shared/models/currencyRates';
 })
 export class CurrencyConverterComponent implements OnInit {
 
-  currencyRates: CurrencyRates[] = [];
+  currencyRates: CurrencyRates;
 
-  constructor(private http: HttpClient, private exchangerateService : ExchangeRateService) { }
+  selectCurencyToChange: Number;
+  selectCurencyToChangeIn: Number;
+  result: Number;
+
+  constructor(private http: HttpClient, private exchangeRateService : ExchangeRateService) { }
 
   ngOnInit() {
+    this.loadData();
+  }
+
+  loadData() {
+    this.exchangeRateService.getLatestCurrencyRates().subscribe(data => {
+      this.currencyRates = data;
+    }, error => {
+      console.log('Error while get latest currency rates data !');
+    });
+  }
+
+  selectFirstCurency(event) {
+    this.selectCurencyToChange = event.target.value;
+    
+  }
+
+  selectSecondCurency(event) {
+    this.selectCurencyToChangeIn = event.target.value;
+    
+  }
+
+  convert(titleInput: Number){
+    let curencyAmountS = Number(titleInput) * Number(this.selectCurencyToChange);
+    this.result = curencyAmountS / Number(this.selectCurencyToChangeIn);
   }
 
 }

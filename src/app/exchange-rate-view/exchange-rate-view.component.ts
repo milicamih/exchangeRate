@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { CurrencyRates } from '../shared/models/currencyRates';
 import { Currency } from '../shared/models/currency';
 
+
 @Component({
   selector: 'app-exchange-rate-view',
   templateUrl: './exchange-rate-view.component.html',
@@ -18,6 +19,8 @@ export class ExchangeRateViewComponent implements OnInit {
   random10Currencies: Currency[] = [];
 
   bsInlineValue = new Date();
+  minDate = new Date(1999, 1, 1);
+  isOpen = false;
   selectedCurrency = null;
   date: string;
   lastHistoricalRate: number;
@@ -69,7 +72,6 @@ export class ExchangeRateViewComponent implements OnInit {
   onClickPickDate(event) {
     this.date = event.toISOString().slice(0, 10);
   }
-
 
   onClickGetHistoricalRate() {
     this.exchangeRateService.getHistoricalCurrencyRates(this.date, this.selectedCurrency).subscribe(data => {
