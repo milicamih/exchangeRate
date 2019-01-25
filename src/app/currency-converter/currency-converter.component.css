@@ -1,4 +1,4 @@
-.convertor-wraper{
+.convertor-warper{
     border: 2px solid #212529; 
     border-radius: 5px;
     padding-bottom: 30px;
@@ -7,7 +7,7 @@ label{
     color:white;
     margin: 12px 0px 1px 0px;
 }
-.amount-input-fild{
+.amount-input-field{
     border-radius: 3px;
     border: 1px solid #28a745;
     padding-left: 13px;
@@ -17,6 +17,10 @@ label{
     margin-top: 35px;
     border-radius: 3px;
     line-height: 29px;
+}
+.convert-btn:focus{
+    box-shadow: none;
+    outline: none;
 }
 .show-conversion-value{
     margin-top: 20px;

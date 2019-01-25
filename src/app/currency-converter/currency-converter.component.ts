@@ -11,9 +11,8 @@ import { CurrencyRates } from '../shared/models/currencyRates';
 export class CurrencyConverterComponent implements OnInit {
 
   currencyRates: CurrencyRates;
-
-  selectCurencyToChange: Number;
-  selectCurencyToChangeIn: Number;
+  selectedCurrencyFrom: Number;
+  selectedCurrencyTo: Number;
   result: Number;
 
   constructor(private http: HttpClient, private exchangeRateService : ExchangeRateService) { }
@@ -30,19 +29,17 @@ export class CurrencyConverterComponent implements OnInit {
     });
   }
 
-  selectFirstCurency(event) {
-    this.selectCurencyToChange = event.target.value;
-    
+  selectFirstCurrency(event) {
+    this.selectedCurrencyFrom = event.target.value;  
   }
 
-  selectSecondCurency(event) {
-    this.selectCurencyToChangeIn = event.target.value;
-    
+  selectSecondCurrency(event) {
+    this.selectedCurrencyTo = event.target.value;  
   }
 
   convert(titleInput: Number){
-    let curencyAmountS = Number(titleInput) * Number(this.selectCurencyToChange);
-    this.result = curencyAmountS / Number(this.selectCurencyToChangeIn);
+    let amountToConvert = Number(titleInput) * Number(this.selectedCurrencyTo);
+    this.result = amountToConvert / Number (this.selectedCurrencyFrom);
   }
 
 }

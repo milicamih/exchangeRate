@@ -1,8 +1,8 @@
-<div class="container convertor-wraper">
+<div class="container convertor-warper">
   <div class="row">
     <div class="bootstrap-colon col-md-6 col-sm-12">
       <label for="">From</label>
-      <select class="select-curency btn-block btn btn-outline-success" (change)="selectFirstCurency($event)">
+      <select class="select-currency btn-block btn btn-outline-success" (change)="selectFirstCurrency($event)">
         <option disabled selected value style="display:none">select one currency</option>
         <option value="{{item.value}}" *ngFor="let item of currencyRates?.rates | keyvalue">
           <b>{{item.key}}</b>
@@ -11,7 +11,7 @@
     </div>
     <div class="bootstrap-colon col-md-6 col-sm-12">
       <label for="">To</label>
-      <select class="select-curency btn-block btn btn-outline-success" (change)="selectSecondCurency($event)">
+      <select class="select-currency btn-block btn btn-outline-success" (change)="selectSecondCurrency($event)">
         <option disabled selected value style="display:none">select one currency</option>
         <option value="{{item.value}}" *ngFor="let item of currencyRates?.rates | keyvalue">
           <b>{{item.key}}</b>
@@ -22,13 +22,16 @@
   <div class="row">
     <div class="bootstrap-colon col-md-6 col-sm-12">
       <label for="">Amount</label>
-      <input class="btn-block amount-input-fild" #amount type="" placeholder="Enter some numeric value"
+      <input class="btn-block amount-input-field" #amount type="number"
+      min="0" placeholder="Enter some numeric value"
       onkeyup="this.value=this.value.replace(/[^\d]/,'')">
     </div>
     <div class="bootstrap-colon col-md-6 col-sm-12">
-      <button (click)="convert(amount.value)" class="convert-btn btn-block btn-success">Convert</button>
+      <button (click)="convert(amount.value)"
+       [disabled]="!selectedCurrencyFrom && !selectedCurrencyTo" 
+       class="convert-btn btn-block btn-success">Convert</button>
     </div>
   </div>
     <div class="show-conversion-value">{{result}}</div>
- </div>   <!--closing row-->
+ </div>   
   

@@ -20,7 +20,6 @@ export class ExchangeRateViewComponent implements OnInit {
 
   bsInlineValue = new Date();
   minDate = new Date(1999, 1, 1);
-  isOpen = false;
   selectedCurrency = null;
   date: string;
   lastHistoricalRate: number;
@@ -65,7 +64,7 @@ export class ExchangeRateViewComponent implements OnInit {
     return randomCurrencies;
   }
 
-  selectCurency(event) {
+  selectCurrency(event) {
     this.selectedCurrency = event.target.value;
   }
 

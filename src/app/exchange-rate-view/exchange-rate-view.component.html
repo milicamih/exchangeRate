@@ -1,8 +1,8 @@
-<div class="container exchange-rate-wraper">
+<div class="container">
   <div class="row">
     <div class="bootstrap-colon col-md-6 col-sm-12">
-      <div class="colon-wraper">
-        <p class="tablecaption">Random curency rates in relation to the EUR</p>
+      <div class="colon-wrapper">
+        <p class="table-caption">Random currency rates in relation to the EUR</p>
         <table class="table table-bordered table-dark">
           <thead>
             <tr>
@@ -23,27 +23,26 @@
       </div>
     </div>
     <div class="bootstrap-colon col-md-6 col-sm-12">
-      <div class="colon-wraper">
+      <div class="colon-wrapper">
         <p class="text">Select the currency and time to see the value of the currency in the selected time</p>
         <div class="form-group">
-          <input class="datepicker-value-show form-control" type="text" 
+          <input class="date-picker-value-show form-control" type="text" 
           placeholder="Datepicker" bsDatepicker [maxDate]="bsInlineValue"
-            [minDate]="minDate" [bsValue]="bsInlineValue"
-             [isOpen]="isOpen" (bsValueChange)="onClickPickDate($event)">
+            [minDate]="minDate" [bsValue]="bsInlineValue" 
+            (bsValueChange)="onClickPickDate($event)">
         </div>
 
-        <select class="select-curency btn-block btn btn-outline-success" (change)="selectCurency($event)">
+        <select class="select-currency btn-block btn btn-outline-success" (change)="selectCurrency($event)">
           <option disabled selected value style="display:none">select one currency</option>
           <option value="{{item.key}}" *ngFor="let item of currencyRates?.rates | keyvalue">
             <b>{{item.key}}</b>
           </option>
         </select>
 
-        <button (click)="onClickGetHistoricalRate()" class="shoow-curency-value-btn btn btn-success">shoow curency
+        <button (click)="onClickGetHistoricalRate()" [disabled]="!selectedCurrency" class="show-currency-value-btn btn btn-success">Show currency
           value</button>
-        <div class="show-curency-rate-on-date">{{lastHistoricalRate}}</div>
+        <div class="show-currency-rate-on-date">{{lastHistoricalRate}}</div>
       </div>
-    </div>
-  </div>
-  <!--closing row-->
+    </div><!--closing col-->
+  </div> <!--closing row-->
 </div>

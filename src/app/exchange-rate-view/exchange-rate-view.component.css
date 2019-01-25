@@ -1,13 +1,14 @@
 .bootstrap-colon{
     border: 2px solid #212529; 
     border-radius: 5px;
+    margin-top: 10px;
 }
-.colon-wraper{
+.colon-wrapper{
     margin: 30px 2px;
     padding: 10px 10px;
     position: relative;
 }
-.tablecaption{
+.table-caption{
     color:white;
     margin-bottom: 15px; 
     padding-top:20px;
@@ -15,15 +16,15 @@
 .text{
     color:white;
 }
-.select-curency{
+.select-currency{
     height: 37px;
     border: 2px solid #28a745;
 }
-.shoow-curency-value-btn{
+.show-currency-value-btn{
     display: block;
     margin:15px auto;
 }
-.show-curency-rate-on-date{
+.show-currency-rate-on-date{
     width: 99%;
     height: 36px;
     text-align: center;

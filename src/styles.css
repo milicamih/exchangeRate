@@ -3,23 +3,21 @@ body{
     background-color: #343a40;  
     font-family: Arial, Helvetica, sans-serif;
 }
-/*changing default datepicker style*/
+/*changing default date-picker style*/
 .bs-datepicker-container {
     background-color: #212529;
-    position: absolute;
-    top:-371px;
-    right: -149px;
 }
 .bs-datepicker-body table td, .bs-datepicker-body table th {
     color: #ecf1f5;
 }
-.datepicker-value-show{
-    margin-top: 340px;
+.date-picker-value-show{
+    margin-top: 20px;
     box-shadow: none;
 }
-.datepicker-value-show, .datepicker-value-show:focus{
+.date-picker-value-show, .date-picker-value-show:focus{
     background-color: #343a40;  
     border: 2px solid #28a745;
     color: #28a745;
     font-weight: bold;
 }
+
