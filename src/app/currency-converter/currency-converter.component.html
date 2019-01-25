@@ -28,7 +28,7 @@
     </div>
     <div class="bootstrap-colon col-md-6 col-sm-12">
       <button (click)="convert(amount.value)"
-       [disabled]="!selectedCurrencyFrom && !selectedCurrencyTo" 
+       [disabled]="!selectedCurrencyFrom || !selectedCurrencyTo" 
        class="convert-btn btn-block btn-success">Convert</button>
     </div>
   </div>
