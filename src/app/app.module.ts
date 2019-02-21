@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 import { CurrencyConverterComponent } from './currency-converter/currency-converter.component';
 import { ExchangeRateViewComponent } from './exchange-rate-view/exchange-rate-view.component';
 import { PageNotFoundComponent } from './not-found.component';
+import { Convertor2Component } from './convertor2/convertor2.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,7 @@ import { PageNotFoundComponent } from './not-found.component';
     CurrencyConverterComponent,
     ExchangeRateViewComponent,
     PageNotFoundComponent,
-
+    Convertor2Component,
   ],
   imports: [
     BrowserModule,

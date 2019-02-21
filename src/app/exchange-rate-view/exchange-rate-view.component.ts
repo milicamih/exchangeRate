@@ -17,6 +17,7 @@ export class ExchangeRateViewComponent implements OnInit {
   currencyRates: CurrencyRates;
   allCurrencies: Currency[] = [];
   random10Currencies: Currency[] = [];
+  currencySymbolsData: any[];
 
   bsInlineValue = new Date();
   minDate = new Date(1999, 1, 1);
@@ -29,40 +30,67 @@ export class ExchangeRateViewComponent implements OnInit {
 
   ngOnInit() {
     this.loadData();
+    this.loadCurrencySymbols();
   }
 
   loadData() {
     this.exchangeRateService.getLatestCurrencyRates().subscribe(data => {
+
+      this.addDescriptionToCurrencySimbol();
       this.currencyRates = data;
       this.allCurrencies = this.getCurrencies(data);
       this.random10Currencies = this.getRandom10Currencies(this.allCurrencies);
+      console.log(this.allCurrencies);
+
     }, error => {
       console.log('Error while get latest currency rates data !');
     });
   }
 
-  getCurrencies(data: CurrencyRates): Currency[] {
+   getCurrencies(data: CurrencyRates): Currency[] {
     return Object.keys(data.rates).map(key => {
       return <Currency>{
         name: key,
         value: data.rates[key]
       }
+     })
+   }
+
+
+   addDescriptionToCurrencySimbol() {
+     setTimeout(() => {
+      this.allCurrencies.forEach(item => {
+        if (this.currencySymbolsData['symbols'][item.name]) {
+          item.explanation = this.currencySymbolsData['symbols'][item.name]
+        }
+       })
+       console.log(this.allCurrencies);
+     }, 1000)
+   }
+
+
+  loadCurrencySymbols() {
+    this.exchangeRateService.getCurrencySymbols().subscribe(data => {
+      this.currencySymbolsData = data;
+      //this.allCurrencies = this.getCurrencies(data)
+    }, error => {
+      console.log('Error while get historical data !');
     })
   }
 
-  getRandom10Currencies(allCurrencies: Currency[]): Currency[] {
-    const randomCurrencies: Currency[] = [];
+   getRandom10Currencies(allCurrencies: Currency[]): Currency[] {
+     const randomCurrencies: Currency[] = [];
 
-    while (randomCurrencies.length < 10) {
-      const randomCurrency = allCurrencies[Math.floor(Math.random() * allCurrencies.length)];
-      const findCurrency = randomCurrencies.find(item => item.name === randomCurrency.name);
-      if (!findCurrency) {
-        randomCurrencies.push(randomCurrency);
-      }
-    }
+     while (randomCurrencies.length < 10) {
+       const randomCurrency = allCurrencies[Math.floor(Math.random() * allCurrencies.length)];
+       const findCurrency = randomCurrencies.find(item => item.name === randomCurrency.name);
+       if (!findCurrency) {
+         randomCurrencies.push(randomCurrency);
+       }
+     }
 
-    return randomCurrencies;
-  }
+     return randomCurrencies;
+   }
 
   selectCurrency(event) {
     this.selectedCurrency = event.target.value;

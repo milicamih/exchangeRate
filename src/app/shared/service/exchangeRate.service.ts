@@ -15,12 +15,21 @@ export class ExchangeRateService {
   constructor(private http: HttpClient) { }
 
   getLatestCurrencyRates(): Observable<CurrencyRates> {
-     return this.http.get<CurrencyRates>(`${this.serverAddress}latest?access_key=${this.accessKey}`);
+    return this.http.get<CurrencyRates>(`${this.serverAddress}latest?access_key=${this.accessKey}`);
   }
 
   getHistoricalCurrencyRates(date: string, currencyName: string): Observable<CurrencyRates> {
     return this.http.get<CurrencyRates>(`${this.serverAddress}${date}?access_key=${this.accessKey}&symbols=${currencyName}`);
- }
-  
+  }
+
+  getCurrencySymbols(): Observable<any> {
+    return this.http.get<any>(`${this.serverAddress}symbols?access_key=${this.accessKey}`);
+  }
+
+  getConverter(selectedCurrencyFrom: any, to: any, amount: number): Observable<any> {
+    return this.http.get<any>(`${this.serverAddress}convert?access_key=${this.accessKey}&from=${selectedCurrencyFrom}&to=${to}&amount=${amount}`);
+
+  }
+
 }
 

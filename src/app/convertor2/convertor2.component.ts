@@ -4,17 +4,17 @@ import { HttpClient } from '@angular/common/http';
 import { CurrencyRates } from '../shared/models/currencyRates';
 
 @Component({
-  selector: 'app-currency-converter',
-  templateUrl: './currency-converter.component.html',
-  styleUrls: ['./currency-converter.component.css']
+  selector: 'app-convertor2',
+  templateUrl: './convertor2.component.html',
+  styleUrls: ['./convertor2.component.css']
 })
-export class CurrencyConverterComponent implements OnInit {
+export class Convertor2Component implements OnInit {
 
   currencyRates: CurrencyRates;
-  selectedCurrencyFrom: number;
-  selectedCurrencyTo: number;
-  result: Number;
-  
+  selectedCurrencyFrom: string;
+  selectedCurrencyTo: string;
+  typedAmount: Number;
+  la: any
 
   constructor(private http: HttpClient, private exchangeRateService : ExchangeRateService) { }
 
@@ -23,14 +23,14 @@ export class CurrencyConverterComponent implements OnInit {
   }
 
   loadData() {
-    this.exchangeRateService.getLatestCurrencyRates().subscribe(data => {
-      this.currencyRates = data;
+    this.exchangeRateService.getLatestCurrencyRates().subscribe(data => {;
+        this.currencyRates = data;
     }, error => {
       console.log('Error while get latest currency rates data !');
     });
   }
 
-  selectFirstCurrency(event) {
+  selectFirstCurrency(event){
     this.selectedCurrencyFrom = event.target.value;  
   }
 
@@ -38,10 +38,13 @@ export class CurrencyConverterComponent implements OnInit {
     this.selectedCurrencyTo = event.target.value;  
   }
 
-  convert(titleInput: Number){
-
-    let amountToConvert = Number(titleInput) * Number(this.selectedCurrencyTo);
-    this.result = amountToConvert / Number (this.selectedCurrencyFrom);
-  }
+  convert(amountt: number){
+    this.exchangeRateService.getConverter(this.selectedCurrencyFrom, this.selectedCurrencyTo, amountt).subscribe(data => {
+    this.la = data; 
+    console.log(this.la);
+    }, error => {
+     console.log('Error while get historical data !');
+   })
+ }
 
 }

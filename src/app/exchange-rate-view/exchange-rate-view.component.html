@@ -7,7 +7,8 @@
           <thead>
             <tr>
               <th scope="col">#</th>
-              <th scope="col">CURRENCY</th>
+              <th scope="col">CURRENCY SYMBOL</th>
+              <th scope="col">CURRENCY NAME</th>
               <th scope="col">VALUE</th>
             </tr>
           </thead>
@@ -15,10 +16,11 @@
             <tr *ngFor="let currency of random10Currencies let i = index">
               <td><b>{{i+1}}</b></td>
               <td><b>{{currency.name}}</b></td>
+              <td><b>{{currency.explanation}}</b></td>
               <td><b>{{currency.value}}</b></td>
             </tr>
           </tbody>
-        </table>
+        </table>  
         <p class="text"><small>* refresh page for new random currencies</small></p>
       </div>
     </div>
@@ -43,6 +45,6 @@
           value</button>
         <div class="show-currency-rate-on-date">{{lastHistoricalRate}}</div>
       </div>
-    </div><!--closing col-->
-  </div> <!--closing row-->
+    </div>
+  </div> 
 </div>
