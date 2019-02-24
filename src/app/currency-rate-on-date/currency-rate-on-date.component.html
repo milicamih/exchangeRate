@@ -1,0 +1,26 @@
+<div class="colon-wrapper">
+    <p class="text">Select the currency and time to see the value of the currency in the selected time</p>
+  <div class="container">
+    <div class="row">
+    <div class="col-md-6 col-xs-12">
+      
+      <div class="form-group">
+        <input class="date-picker-value-show form-control" type="text" placeholder="Datepicker" bsDatepicker [maxDate]="bsInlineValue"
+          [minDate]="minDate" [bsValue]="bsInlineValue" (bsValueChange)="onClickPickDate($event)">
+      </div>
+
+    </div>
+    <div class="col-md-6 col-xs-12">
+      <select class="select-currency btn-block btn btn-outline-success" (change)="selectCurrency($event)">
+        <option disabled selected value style="display:none">select one currency</option>
+        <option value="{{item.key}}" *ngFor="let item of currencyRates?.rates | keyvalue">
+          <b>{{item.key}}</b>
+        </option>
+      </select>
+    </div>
+  </div>
+  </div>
+  <button (click)="onClickGetHistoricalRate()" [disabled]="!selectedCurrency" class="show-currency-value-btn btn btn-success">Show
+    currency value</button>
+  <div class="show-currency-rate-on-date">{{lastHistoricalRate}}</div>
+</div>

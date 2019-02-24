@@ -41,7 +41,7 @@ export class CurrencyConverterComponent implements OnInit {
   convert(titleInput: Number){
 
     let amountToConvert = Number(titleInput) * Number(this.selectedCurrencyTo);
-    this.result = amountToConvert / Number (this.selectedCurrencyFrom);
+    this.result = amountToConvert / Number (this.selectedCurrencyFrom);  
   }
 
 }

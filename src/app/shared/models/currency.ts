@@ -1,5 +1,6 @@
 export class Currency {
-    name: string;
+  
+    nameShort: string;
     value: number;
-    explanation?: string;
+    nameLong?: string;
   }

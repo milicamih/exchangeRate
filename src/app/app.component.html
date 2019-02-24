@@ -12,17 +12,26 @@
     <ul class="navbar-nav">
       <li class="nav-item">
        <b><a class="router-link nav-link" routerLink="/exchangeRateView" 
-        routerLinkActive="active-link">EXCHANGE RATES</a></b>
+        routerLinkActive="active-link">CURRENCY RATES</a></b>
+      </li>
+      <li class="nav-item">
+        <b><a class="router-link nav-link" routerLink="/currencyRateOnDate"
+        [routerLinkActive]="['active-link']">HISTORICAL CURRENCY RATES</a></b>
       </li>
       <li class="nav-item">
         <b><a class="router-link nav-link" routerLink="/currencyConverter"
         [routerLinkActive]="['active-link']">CURRENCY CONVERTER</a></b>
       </li>
       <li class="nav-item">
-        <b><a class="router-link nav-link" routerLink="/onverter2"
-        [routerLinkActive]="['active-link']">CONVERTER2</a></b>
+        <b><a class="router-link nav-link" routerLink="/convertor2"
+        [routerLinkActive]="['active-link']">HISTORICAL CURRENCY CONVERTER</a></b>
       </li>
     </ul>
   </nav>
 
+
   <router-outlet></router-outlet>
+  
+  <div class="stop-spinner" id="spinner" #spinner>
+    <img src="assets/img/load.gif" alt="spinner" style="width:80px;">
+  </div>

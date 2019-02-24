@@ -1,12 +1,12 @@
-.bootstrap-colon{
-    border: 2px solid #212529; 
-    border-radius: 5px;
-    margin-top: 10px;
-}
 .colon-wrapper{
-    margin: 30px 2px;
+    margin: 5px 30px 30px;
     padding: 10px 10px;
     position: relative;
+}
+.table-head-row, .first-colon-of-table{
+    background-color:#28a745 ;
+    font-weight: 900;
+    color:white;
 }
 .table-caption{
     color:white;
@@ -15,20 +15,4 @@
 }
 .text{
     color:white;
-}
-.select-currency{
-    height: 37px;
-    border: 2px solid #28a745;
-}
-.show-currency-value-btn{
-    display: block;
-    margin:15px auto;
-}
-.show-currency-rate-on-date{
-    width: 99%;
-    height: 36px;
-    text-align: center;
-    font-size: 30px;
-    border-radius: 5px;
-    color: #28a745;
 }

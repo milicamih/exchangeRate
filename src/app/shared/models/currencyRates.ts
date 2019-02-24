@@ -1,4 +1,3 @@
-
 export class CurrencyRates {
   
   success: boolean;

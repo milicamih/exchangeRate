@@ -11,6 +11,7 @@ import { CurrencyConverterComponent } from './currency-converter/currency-conver
 import { ExchangeRateViewComponent } from './exchange-rate-view/exchange-rate-view.component';
 import { PageNotFoundComponent } from './not-found.component';
 import { Convertor2Component } from './convertor2/convertor2.component';
+import { CurrencyRateOnDateComponent } from './currency-rate-on-date/currency-rate-on-date.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { Convertor2Component } from './convertor2/convertor2.component';
     ExchangeRateViewComponent,
     PageNotFoundComponent,
     Convertor2Component,
+    CurrencyRateOnDateComponent,
   ],
   imports: [
     BrowserModule,

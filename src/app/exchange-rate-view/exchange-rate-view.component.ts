@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ExchangeRateService } from '../shared/service/exchangeRate.service';
+import { SpinerService } from '../shared/spinerService/spiner.service';
 import { HttpClient } from '@angular/common/http';
+import { forkJoin } from 'rxjs';
 
 
 import { CurrencyRates } from '../shared/models/currencyRates';
 import { Currency } from '../shared/models/currency';
+import { CurrencyFullNames } from '../shared/models/currencyFullNames';
 
 
 @Component({
@@ -17,95 +20,57 @@ export class ExchangeRateViewComponent implements OnInit {
   currencyRates: CurrencyRates;
   allCurrencies: Currency[] = [];
   random10Currencies: Currency[] = [];
-  currencySymbolsData: any[];
+  currencySymbolsData: CurrencyFullNames;
+  loading: boolean = false;
 
-  bsInlineValue = new Date();
-  minDate = new Date(1999, 1, 1);
-  selectedCurrency = null;
-  date: string;
-  lastHistoricalRate: number;
-
-  constructor(private http: HttpClient, private exchangeRateService: ExchangeRateService) {
+  constructor(private http: HttpClient, private exchangeRateService: ExchangeRateService, private spinerService: SpinerService) {
   }
 
   ngOnInit() {
-    this.loadData();
-    this.loadCurrencySymbols();
-  }
-
-  loadData() {
-    this.exchangeRateService.getLatestCurrencyRates().subscribe(data => {
-
-      this.addDescriptionToCurrencySimbol();
-      this.currencyRates = data;
-      this.allCurrencies = this.getCurrencies(data);
+    forkJoin([
+      this.exchangeRateService.getLatestCurrencyRates(),
+      this.exchangeRateService.getCurrencySymbolsNames()
+    ]).subscribe(([allData, currencyNames]) => {
+      this.spinerService.startLoading();
+      this.currencyRates = allData;
+      this.allCurrencies = this.getCurrencies();
+      this.currencySymbolsData = currencyNames;
+      this.addDescriptionToCurrencySymbol();
       this.random10Currencies = this.getRandom10Currencies(this.allCurrencies);
-      console.log(this.allCurrencies);
-
-    }, error => {
-      console.log('Error while get latest currency rates data !');
+      this.spinerService.stopLoading();
+    }, (error) => {
+      console.log(error);
     });
   }
 
-   getCurrencies(data: CurrencyRates): Currency[] {
-    return Object.keys(data.rates).map(key => {
+  getCurrencies(): Currency[] {
+    return Object.keys(this.currencyRates.rates).map(key => {
       return <Currency>{
-        name: key,
-        value: data.rates[key]
+        nameShort: key,
+        value: this.currencyRates.rates[key]
       }
-     })
-   }
+    })
+  }
 
-
-   addDescriptionToCurrencySimbol() {
-     setTimeout(() => {
+  addDescriptionToCurrencySymbol() {
       this.allCurrencies.forEach(item => {
-        if (this.currencySymbolsData['symbols'][item.name]) {
-          item.explanation = this.currencySymbolsData['symbols'][item.name]
+        if (this.currencySymbolsData.symbols[item.nameShort]) {
+          item.nameLong = this.currencySymbolsData.symbols[item.nameShort]
         }
-       })
-       console.log(this.allCurrencies);
-     }, 1000)
-   }
-
-
-  loadCurrencySymbols() {
-    this.exchangeRateService.getCurrencySymbols().subscribe(data => {
-      this.currencySymbolsData = data;
-      //this.allCurrencies = this.getCurrencies(data)
-    }, error => {
-      console.log('Error while get historical data !');
-    })
+      })
   }
 
-   getRandom10Currencies(allCurrencies: Currency[]): Currency[] {
-     const randomCurrencies: Currency[] = [];
+  getRandom10Currencies(allCurrencies: Currency[]): Currency[] {
+    const randomCurrencies: Currency[] = [];
 
-     while (randomCurrencies.length < 10) {
-       const randomCurrency = allCurrencies[Math.floor(Math.random() * allCurrencies.length)];
-       const findCurrency = randomCurrencies.find(item => item.name === randomCurrency.name);
-       if (!findCurrency) {
-         randomCurrencies.push(randomCurrency);
-       }
-     }
-
-     return randomCurrencies;
-   }
-
-  selectCurrency(event) {
-    this.selectedCurrency = event.target.value;
-  }
-
-  onClickPickDate(event) {
-    this.date = event.toISOString().slice(0, 10);
-  }
-
-  onClickGetHistoricalRate() {
-    this.exchangeRateService.getHistoricalCurrencyRates(this.date, this.selectedCurrency).subscribe(data => {
-      this.lastHistoricalRate = data.rates[this.selectedCurrency];
-    }, error => {
-      console.log('Error while get historical data !');
-    })
+    while (randomCurrencies.length < 10) {
+      const randomCurrency = allCurrencies[Math.floor(Math.random() * allCurrencies.length)];
+      const findCurrency = randomCurrencies.find(item => item.nameShort === randomCurrency.nameShort);
+      if (!findCurrency) {
+        randomCurrencies.push(randomCurrency);
+      }
+    }
+    return randomCurrencies;
   }
 
 }

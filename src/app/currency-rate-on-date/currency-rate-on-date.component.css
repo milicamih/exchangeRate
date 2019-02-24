@@ -1,0 +1,29 @@
+.colon-wrapper{
+    border: 2px solid #212529; 
+    border-radius: 3px;
+    margin: 10px 30px; 
+    padding: 20px 15px;
+    position: relative;
+}
+.text{
+    color:white;
+    text-align: center;
+}
+.select-currency{
+    margin-top: 20px;
+    height: 38px;
+    border: 2px solid #28a745;
+}
+.show-currency-value-btn{
+    display: block;
+    margin:30px auto;
+}
+.show-currency-rate-on-date{
+    width: 99%;
+    height: 36px;
+    text-align: center;
+    font-size: 18px;
+    border-radius: 5px;
+    color: #28a745;
+}
+
