@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ExchangeRateService } from '../shared/service/exchangeRate.service';
+import { ExchangeRateService } from '../shared/services/exchangeRatesService/exchangeRate.service';
+import { SpinnerService } from '../shared/services/spinnerService/spinner.service';
 import { HttpClient } from '@angular/common/http';
 
-
 import { CurrencyRates } from '../shared/models/currencyRates';
-import { Currency } from '../shared/models/currency';
+import { CurrencyHistoricalRate } from './currencyHistoricalRate'
+
 
 @Component({
   selector: 'app-currency-rate-on-date',
@@ -14,17 +15,14 @@ import { Currency } from '../shared/models/currency';
 export class CurrencyRateOnDateComponent implements OnInit {
 
   currencyRates: CurrencyRates;
-  allCurrencies: Currency[] = [];
-  random10Currencies: Currency[] = [];
-  currencySymbolsData: any[];
-
   bsInlineValue = new Date();
   minDate = new Date(1999, 1, 1);
   selectedCurrency = null;
   date: string;
   lastHistoricalRate: any;
+  historicalValueOfCurrency: CurrencyHistoricalRate;
 
-  constructor(private http: HttpClient, private exchangeRateService: ExchangeRateService) {
+  constructor(private http: HttpClient, private exchangeRateService: ExchangeRateService, private spinnerService: SpinnerService) {
   }
   ngOnInit() {
     this.loadData();
@@ -32,28 +30,13 @@ export class CurrencyRateOnDateComponent implements OnInit {
 
   loadData() {
     this.exchangeRateService.getLatestCurrencyRates().subscribe(data => {
-
-     
       this.currencyRates = data;
-      this.allCurrencies = this.getCurrencies(data);
-    
-      console.log(this.allCurrencies);
-
     }, error => {
       console.log('Error while get latest currency rates data !');
     });
   }
 
-   getCurrencies(data: CurrencyRates): Currency[] {
-    return Object.keys(data.rates).map(key => {
-      return <Currency>{
-        nameShort: key,
-        value: data.rates[key]
-      }
-     })
-   }
-
-   selectCurrency(event) {
+  selectCurrency(event) {
     this.selectedCurrency = event.target.value;
   }
 
@@ -62,9 +45,13 @@ export class CurrencyRateOnDateComponent implements OnInit {
   }
 
   onClickGetHistoricalRate() {
+    this.spinnerService.start();
     this.exchangeRateService.getHistoricalCurrencyRates(this.date, this.selectedCurrency).subscribe(data => {
-      this.lastHistoricalRate = ` On ${this.date}   1EUR = ${data.rates[this.selectedCurrency]} ${this.selectedCurrency}`;
+      this.lastHistoricalRate = data.rates[this.selectedCurrency];
+      this.historicalValueOfCurrency = new CurrencyHistoricalRate(this.date, this.selectedCurrency, this.lastHistoricalRate);
+      this.spinnerService.stop()
     }, error => {
+      this.spinnerService.stop()
       console.log('Error while get historical data !');
     })
   }

@@ -10,8 +10,8 @@ import { AppComponent } from './app.component';
 import { CurrencyConverterComponent } from './currency-converter/currency-converter.component';
 import { ExchangeRateViewComponent } from './exchange-rate-view/exchange-rate-view.component';
 import { PageNotFoundComponent } from './not-found.component';
-import { Convertor2Component } from './convertor2/convertor2.component';
 import { CurrencyRateOnDateComponent } from './currency-rate-on-date/currency-rate-on-date.component';
+import { HistoricalConvertorComponent } from './historical-convertor/historical-convertor.component';
 
 @NgModule({
   declarations: [
@@ -19,8 +19,8 @@ import { CurrencyRateOnDateComponent } from './currency-rate-on-date/currency-ra
     CurrencyConverterComponent,
     ExchangeRateViewComponent,
     PageNotFoundComponent,
-    Convertor2Component,
     CurrencyRateOnDateComponent,
+    HistoricalConvertorComponent,
   ],
   imports: [
     BrowserModule,

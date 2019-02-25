@@ -23,7 +23,7 @@
         [routerLinkActive]="['active-link']">CURRENCY CONVERTER</a></b>
       </li>
       <li class="nav-item">
-        <b><a class="router-link nav-link" routerLink="/convertor2"
+        <b><a class="router-link nav-link" routerLink="/historicalConvertor"
         [routerLinkActive]="['active-link']">HISTORICAL CURRENCY CONVERTER</a></b>
       </li>
     </ul>
@@ -33,5 +33,6 @@
   <router-outlet></router-outlet>
   
   <div class="stop-spinner" id="spinner" #spinner>
-    <img src="assets/img/load.gif" alt="spinner" style="width:80px;">
+    <div class="loader"></div>
+    <p>Please wait</p>
   </div>

@@ -1,4 +1,5 @@
-<div class="container convertor-warper">
+<div class="context-wrapper">
+  <p class="text"> Chose currencies, enter date and amount to se relations of currencies on chosen date</p>
   <div class="row">
     <div class="bootstrap-colon col-md-6 col-sm-12">
       <label for="">From</label>
@@ -28,6 +29,7 @@
     </div>
     <div class="bootstrap-colon col-md-6 col-sm-12">
       <div class="form-group">
+          <label for="">Date</label>
         <input class="date-picker-value-show form-control date" type="text" placeholder="Datepicker" bsDatepicker [maxDate]="bsInlineValue"
           [minDate]="minDate" [bsValue]="bsInlineValue" (bsValueChange)="onClickPickDate($event)">
       </div>
@@ -36,8 +38,8 @@
   <div class="button-warper">
     <button (click)="convert(amount.value)"
     [disabled]="!selectedCurrencyFrom || !selectedCurrencyTo" 
-    class="convert-btn btn-block btn-success">Convert</button>
+    class="show-value-btn btn btn-success">Convert currencies</button>
   </div>
-    <div class="show-conversion-value" *ngIf="result">{{result}}</div>
-    <div class="show-conversion-value" *ngIf="errorMessage">{{errorMessage.success}}</div>
+    <div class="show-result" *ngIf="result">{{result}}</div>
+    <div class="show-result-error" *ngIf="errorMessage">{{errorMessage.error.type}} <br/>{{errorMessage.error.info}}</div>
  </div>  

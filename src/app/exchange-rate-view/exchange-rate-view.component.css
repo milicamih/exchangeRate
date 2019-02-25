@@ -1,10 +1,10 @@
 .colon-wrapper{
-    margin: 5px 30px 30px;
+    margin: 0px 30px 30px;
     padding: 10px 10px;
     position: relative;
 }
 .table-head-row, .first-colon-of-table{
-    background-color:#28a745 ;
+    background-color:var(--main-color);
     font-weight: 900;
     color:white;
 }

@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { ExchangeRateService } from '../shared/service/exchangeRate.service';
+import { ExchangeRateService } from '../shared/services/exchangeRatesService/exchangeRate.service';
+import { SpinnerService } from '../shared/services/spinnerService/spinner.service';
 import { HttpClient } from '@angular/common/http';
 import { CurrencyRates } from '../shared/models/currencyRates';
 import { ErrorResponse } from '../shared/models/errorResponse';
-import { ErrorType } from '../shared/models/errorType';
 
 @Component({
-  selector: 'app-convertor2',
-  templateUrl: './convertor2.component.html',
-  styleUrls: ['./convertor2.component.css']
+  selector: 'app-historical-convertor.component',
+  templateUrl: './historical-convertor.component.html',
+  styleUrls: ['./historical-convertor.component.css']
 })
-export class Convertor2Component implements OnInit {
+export class HistoricalConvertorComponent implements OnInit {
 
   
   bsInlineValue = new Date();
@@ -23,7 +23,7 @@ export class Convertor2Component implements OnInit {
   result: number;
   errorMessage: ErrorResponse;
 
-  constructor(private http: HttpClient, private exchangeRateService: ExchangeRateService) { }
+  constructor(private http: HttpClient, private exchangeRateService: ExchangeRateService, private spinnerService: SpinnerService) { }
 
   ngOnInit() {
     this.loadData();
@@ -33,7 +33,6 @@ export class Convertor2Component implements OnInit {
     this.exchangeRateService.getLatestCurrencyRates().subscribe(data => {
       this.currencyRates = data;
     }, error => {
-
       console.log('Error while get latest currency rates data !');
     });
   }
@@ -50,18 +49,16 @@ export class Convertor2Component implements OnInit {
   }
 
   convert(amount: number) {
+    this.spinnerService.start();
     this.exchangeRateService.getConverter(this.selectedCurrencyFrom, this.selectedCurrencyTo, amount, this.date).subscribe(data => {
-      if(data["success"]==="true"){
-        this.result = data;
-      }
-      else if(data["success"]==="false"){
-        this.errorMessage = data;
-      }
+     if(data.success === true) {
+       this.typedAmount = data;
+     }
+     this.errorMessage = data;
+     this.spinnerService.stop();
     }, error => {
-      console.log('Error while get historical data !');
-    
+      this.spinnerService.stop();
+      console.log('Error while get historical data !'); 
     })
-  }
-
-  
+  } 
 }

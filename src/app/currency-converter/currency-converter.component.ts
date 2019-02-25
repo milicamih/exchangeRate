@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ExchangeRateService } from '../shared/service/exchangeRate.service';
+import { ExchangeRateService } from '../shared/services/exchangeRatesService/exchangeRate.service';
 import { HttpClient } from '@angular/common/http';
 import { CurrencyRates } from '../shared/models/currencyRates';
 
@@ -15,7 +15,6 @@ export class CurrencyConverterComponent implements OnInit {
   selectedCurrencyTo: number;
   result: Number;
   
-
   constructor(private http: HttpClient, private exchangeRateService : ExchangeRateService) { }
 
   ngOnInit() {
@@ -31,7 +30,11 @@ export class CurrencyConverterComponent implements OnInit {
   }
 
   selectFirstCurrency(event) {
-    this.selectedCurrencyFrom = event.target.value;  
+    this.selectedCurrencyFrom = event.target.value;
+   
+    
+    const ky = Object.keys(this.currencyRates.rates).find(key => this.currencyRates.rates[key] === this.selectedCurrencyFrom);
+    console.log(ky);
   }
 
   selectSecondCurrency(event) {
@@ -39,7 +42,6 @@ export class CurrencyConverterComponent implements OnInit {
   }
 
   convert(titleInput: Number){
-
     let amountToConvert = Number(titleInput) * Number(this.selectedCurrencyTo);
     this.result = amountToConvert / Number (this.selectedCurrencyFrom);  
   }

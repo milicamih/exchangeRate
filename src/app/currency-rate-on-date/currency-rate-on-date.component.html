@@ -1,14 +1,12 @@
-<div class="colon-wrapper">
+<div class="context-wrapper">
     <p class="text">Select the currency and time to see the value of the currency in the selected time</p>
   <div class="container">
     <div class="row">
     <div class="col-md-6 col-xs-12">
-      
       <div class="form-group">
         <input class="date-picker-value-show form-control" type="text" placeholder="Datepicker" bsDatepicker [maxDate]="bsInlineValue"
           [minDate]="minDate" [bsValue]="bsInlineValue" (bsValueChange)="onClickPickDate($event)">
       </div>
-
     </div>
     <div class="col-md-6 col-xs-12">
       <select class="select-currency btn-block btn btn-outline-success" (change)="selectCurrency($event)">
@@ -20,7 +18,10 @@
     </div>
   </div>
   </div>
-  <button (click)="onClickGetHistoricalRate()" [disabled]="!selectedCurrency" class="show-currency-value-btn btn btn-success">Show
+  <button (click)="onClickGetHistoricalRate()" [disabled]="!selectedCurrency" class="show-value-btn btn btn-success">Show
     currency value</button>
-  <div class="show-currency-rate-on-date">{{lastHistoricalRate}}</div>
+  <div class="show-result" *ngIf="historicalValueOfCurrency">
+    <p> On {{historicalValueOfCurrency.date | date: "dd.MM.y"}} </p>
+    <p class="show-currency-value-p"><b>1Eur = {{historicalValueOfCurrency.value}} {{historicalValueOfCurrency.currency}}</b></p>
+  </div>
 </div>

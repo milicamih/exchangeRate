@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ExchangeRateService } from '../shared/service/exchangeRate.service';
-import { SpinerService } from '../shared/spinerService/spiner.service';
+import { ExchangeRateService } from '../shared/services/exchangeRatesService/exchangeRate.service';
+import { SpinnerService } from '../shared/services/spinnerService/spinner.service';
 import { HttpClient } from '@angular/common/http';
 import { forkJoin } from 'rxjs';
-
 
 import { CurrencyRates } from '../shared/models/currencyRates';
 import { Currency } from '../shared/models/currency';
@@ -21,24 +20,24 @@ export class ExchangeRateViewComponent implements OnInit {
   allCurrencies: Currency[] = [];
   random10Currencies: Currency[] = [];
   currencySymbolsData: CurrencyFullNames;
-  loading: boolean = false;
 
-  constructor(private http: HttpClient, private exchangeRateService: ExchangeRateService, private spinerService: SpinerService) {
+  constructor(private http: HttpClient, private exchangeRateService: ExchangeRateService, private spinnerService: SpinnerService) {
   }
 
   ngOnInit() {
+    this.spinnerService.start();
     forkJoin([
       this.exchangeRateService.getLatestCurrencyRates(),
       this.exchangeRateService.getCurrencySymbolsNames()
     ]).subscribe(([allData, currencyNames]) => {
-      this.spinerService.startLoading();
       this.currencyRates = allData;
       this.allCurrencies = this.getCurrencies();
       this.currencySymbolsData = currencyNames;
       this.addDescriptionToCurrencySymbol();
       this.random10Currencies = this.getRandom10Currencies(this.allCurrencies);
-      this.spinerService.stopLoading();
+      this.spinnerService.stop();
     }, (error) => {
+      this.spinnerService.stop();
       console.log(error);
     });
   }

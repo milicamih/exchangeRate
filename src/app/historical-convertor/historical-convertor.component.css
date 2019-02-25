@@ -4,9 +4,18 @@ label{
 }
 .show-value-button{
     height: 38px;
+    margin: 0 auto;
     margin-top: 36px;
 }
 .show-value-button:focus{
     box-shadow: none;
     outline: none;
+}
+.date-picker-value-show{
+    margin-top: 0;
+}
+.show-result-error{
+    font-size: 16px;
+    color:#d85b5b;
+    text-align: center;
 }
