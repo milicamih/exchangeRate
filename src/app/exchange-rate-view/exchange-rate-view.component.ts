@@ -16,10 +16,8 @@ import { CurrencyFullNames } from '../shared/models/currencyFullNames';
 })
 export class ExchangeRateViewComponent implements OnInit {
 
-  currencyRates: CurrencyRates;
   allCurrencies: Currency[] = [];
   random10Currencies: Currency[] = [];
-  currencySymbolsData: CurrencyFullNames;
 
   constructor(private http: HttpClient, private exchangeRateService: ExchangeRateService, private spinnerService: SpinnerService) {
   }
@@ -29,11 +27,9 @@ export class ExchangeRateViewComponent implements OnInit {
     forkJoin([
       this.exchangeRateService.getLatestCurrencyRates(),
       this.exchangeRateService.getCurrencySymbolsNames()
-    ]).subscribe(([allData, currencyNames]) => {
-      this.currencyRates = allData;
-      this.allCurrencies = this.getCurrencies();
-      this.currencySymbolsData = currencyNames;
-      this.addDescriptionToCurrencySymbol();
+    ]).subscribe(([currencyRates, currencyNames]) => {
+      this.allCurrencies = this.getCurrencies(currencyRates);
+      this.addDescriptionToCurrencySymbol(currencyNames);
       this.random10Currencies = this.getRandom10Currencies(this.allCurrencies);
       this.spinnerService.stop();
     }, (error) => {
@@ -42,19 +38,19 @@ export class ExchangeRateViewComponent implements OnInit {
     });
   }
 
-  getCurrencies(): Currency[] {
-    return Object.keys(this.currencyRates.rates).map(key => {
+  getCurrencies(currencyRates: CurrencyRates): Currency[] {
+    return Object.keys(currencyRates.rates).map(key => {
       return <Currency>{
         nameShort: key,
-        value: this.currencyRates.rates[key]
+        value: currencyRates.rates[key]
       }
     })
   }
 
-  addDescriptionToCurrencySymbol() {
+  addDescriptionToCurrencySymbol(currencySymbolsData: CurrencyFullNames) {
       this.allCurrencies.forEach(item => {
-        if (this.currencySymbolsData.symbols[item.nameShort]) {
-          item.nameLong = this.currencySymbolsData.symbols[item.nameShort]
+        if (currencySymbolsData.symbols[item.nameShort]) {
+          item.nameLong = currencySymbolsData.symbols[item.nameShort]
         }
       })
   }

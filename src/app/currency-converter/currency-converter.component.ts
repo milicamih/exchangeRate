@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ExchangeRateService } from '../shared/services/exchangeRatesService/exchangeRate.service';
+import { SpinnerService } from '../shared/services/spinnerService/spinner.service';
 import { HttpClient } from '@angular/common/http';
 import { CurrencyRates } from '../shared/models/currencyRates';
 
@@ -14,8 +15,9 @@ export class CurrencyConverterComponent implements OnInit {
   selectedCurrencyFrom: number;
   selectedCurrencyTo: number;
   result: Number;
+  b: string;
   
-  constructor(private http: HttpClient, private exchangeRateService : ExchangeRateService) { }
+  constructor(private http: HttpClient, private exchangeRateService : ExchangeRateService, private spinnerService: SpinnerService) { }
 
   ngOnInit() {
     this.loadData();
@@ -28,13 +30,9 @@ export class CurrencyConverterComponent implements OnInit {
       console.log('Error while get latest currency rates data !');
     });
   }
-
-  selectFirstCurrency(event) {
-    this.selectedCurrencyFrom = event.target.value;
-   
     
-    const ky = Object.keys(this.currencyRates.rates).find(key => this.currencyRates.rates[key] === this.selectedCurrencyFrom);
-    console.log(ky);
+  selectFirstCurrency(event) {
+   this.selectedCurrencyFrom = event.target.value;
   }
 
   selectSecondCurrency(event) {
@@ -42,8 +40,10 @@ export class CurrencyConverterComponent implements OnInit {
   }
 
   convert(titleInput: Number){
+    this.spinnerService.start();
     let amountToConvert = Number(titleInput) * Number(this.selectedCurrencyTo);
     this.result = amountToConvert / Number (this.selectedCurrencyFrom);  
+    this.spinnerService.stop();
   }
 
 }
